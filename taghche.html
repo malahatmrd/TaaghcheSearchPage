@@ -1,0 +1,1346 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        @font-face {
+            src: url(fonts/Far_DastNevis.otf);
+            font-family: DastNevis;
+        }
+
+        body {
+            margin: 0;
+            font-family: DastNevis;
+            direction: rtl;
+            color: #333;
+            padding: 0;
+        }
+
+        #first_page>#header {
+            border: 1px solid #ccc;
+            height: 130px;
+        }
+
+        #header>.up {
+            height: 70px;
+            display: flex;
+            justify-content: center;
+            line-height: 50px;
+            gap: 30px;
+            position: relative;
+        }
+
+        #header>.up>.logo {
+            display: flex;
+            flex-flow: row nowrap;
+            justify-content: center;
+            position: relative;
+            left: 100px;
+            top: -35px;
+        }
+
+        #header>.up>.logo img {
+            height: 180%;
+            width: 180%;
+        }
+
+        #header>.up>.search {
+            width: 80%;
+            max-width: 700px;
+            display: flex;
+            align-items: center;
+            border-radius: 10px;
+            position: relative;
+            top: 2px;
+            left: 100px;
+        }
+
+        #header>.up>.search input {
+            border: none;
+            background: rgba(0, 0, 0, 0.08);
+            padding: 15px;
+            border-radius: 30px;
+            flex: 1;
+            font-size: 16px;
+            outline: none;
+            cursor: text;
+            font-family: DastNevis;
+        }
+
+        #header>.up>.user_account {
+            background: rgba(0, 0, 0, 0.08);
+            border-radius: 30px;
+            width: 145px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 10px;
+            white-space: nowrap;
+            cursor: pointer;
+            position: relative;
+            top: 15px;
+            right: 50px;
+        }
+
+        #header>.up>.user_account p {
+            margin: 0;
+            font-size: 20px;
+            font-family: DastNevis;
+        }
+
+        #header>.down {
+            height: 60px;
+            width: auto;
+            display: flex;
+            flex-flow: row nowrap;
+            justify-content: center;
+            white-space: nowrap;
+            gap: 15px;
+            position: relative;
+            left: 200px;
+        }
+
+        #header>.down>.item {
+            position: relative;
+            width: 100px;
+            height: 48px;
+            align-items: first baseline;
+            display: flex;
+            justify-content: center;
+            font-family: Tahoma, sans-serif;
+            font-size: 15px;
+            text-align: center;
+            cursor: pointer;
+            background-repeat: no-repeat;
+            padding: 0 25px;
+            position: relative;
+            left: 110px;
+            top: 13px;
+            font-family: DastNevis;
+        }
+
+        #header>.down>.item img {
+            display: block;
+            margin-left: 8px;
+            display: flex;
+            flex-flow: row-reverse wrap;
+            justify-content: center;
+            position: relative;
+            top: 5px;
+        }
+
+        #header>.down>.item:hover {
+            background: rgba(0, 153, 153, 0.2);
+        }
+
+        #header>.down>.cart {
+            border: 1px solid #ccc;
+            background: #ffffff;
+            border-radius: 25px;
+            width: 30px;
+            height: 30px;
+
+            display: flex;
+            justify-content: center;
+            text-align: center;
+            cursor: pointer;
+
+            padding-top: 10px;
+            position: relative;
+            right: 450px;
+            top: 10px;
+        }
+
+        #header>.down>.cart img {
+            width: 20px;
+            height: 20px;
+        }
+
+        #header>.down>.cart span {
+            background-color: #e4e4e4;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #007474;
+            position: absolute;
+            top: -8px;
+            left: 20px;
+            width: 20px;
+            height: 20px;
+            font-size: 15px;
+        }
+
+        .listCart {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .listCart li {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+            margin-bottom: 10px;
+        }
+
+        .listCart img {
+            width: 40px;
+            height: 40px;
+            object-fit: cover;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+
+        .removeFromCart {
+            border: none;
+            width: 20px;
+            height: 20px;
+            background: url("img/icons8-trash-20.png") no-repeat center center;
+            background-size: contain;
+            cursor: pointer;
+        }
+
+        .removeFromCart:hover {
+            opacity: 0.7;
+        }
+
+        .quantity {
+            font-weight: bold;
+        }
+
+        .cart-footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .active .cart {
+            left: calc(100% - 300px);
+        }
+
+        .active .container {
+            transform: translateX(-200px);
+        }
+
+        .addToCart {
+            background-color: #009999;
+            color: #fff;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            font-size: 20px;
+            font-family: DastNevis;
+            border: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            position: absolute;
+            top: 210px;
+            right: 150px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .addToCart:hover {
+            background-color: #007474;
+        }
+
+        .hide {
+            display: none;
+        }
+
+        .show {
+            display: block;
+        }
+
+        #header>.down>.shopping {
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            position: fixed;
+            top: 0;
+            right: -300px;
+            width: 300px;
+            background-color: #eeeeee;
+            height: 100vh;
+            z-index: 100;
+            transition: right s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        #header>.down>.shopping.show {
+            right: 0;
+        }
+
+        #header>.down>.shopping h1 {
+            color: rgb(0, 0, 0);
+            font-weight: 100;
+            margin: 0;
+            padding: 0 20px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            position: relative;
+            left: 0;
+            font-family: DastNevis;
+        }
+
+        #header>.down>.shopping .checkout {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        #header>.down>.shopping .checkout div {
+            background-color: #cbcbcb;
+            width: 100%;
+            height: 70px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        #header>.down>.shopping .checkout div:nth-child(2) {
+            background-color: #009999;
+            color: #ffffff;
+        }
+
+        #header>.down>.install {
+            background: #009999;
+            color: #fff;
+            border-radius: 25px;
+            width: 130px;
+            height: 35px;
+            align-items: last baseline;
+            display: flex;
+            justify-content: center;
+
+
+            text-align: center;
+            cursor: pointer;
+            padding-top: 10px;
+            position: relative;
+            right: 440px;
+            top: 10px;
+        }
+
+        #header>.down>.install p {
+            font-size: 20px;
+            font-family: DastNevis;
+            text-align: center;
+
+            position: relative;
+            top: 15px;
+        }
+
+        #first_page>#content {
+            height: 1000px;
+            display: flex;
+            flex-flow: row-reverse wrap;
+            justify-content: center;
+        }
+
+        #content>.content_top {
+            height: 3%;
+            font-size: xx-large;
+            font-weight: 100;
+            margin-left: 1050px;
+            position: relative;
+            top: -10px;
+        }
+
+        #content>.content_bottom {
+            /* border: 1px solid red; */
+            height: 97%;
+            width: 80%;
+        }
+
+        #content>.content_bottom>.content_bottom_up {
+            border-bottom: 1px solid #ccc;
+            height: 8%;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            flex-flow: row nowrap;
+            gap: 8px;
+        }
+
+        #content>.content_bottom>.content_bottom_up>.content_bot_item {
+            position: relative;
+            width: 80px;
+            height: 40px;
+            font-family: DastNevis;
+            font-size: 16px;
+            text-align: center;
+            cursor: pointer;
+            padding: 0 13px;
+            position: relative;
+            left: 350px;
+            top: 36px;
+        }
+
+        #content>.content_bottom>.content_bottom_up>.content_bot_item:hover {
+            border-bottom: 2px solid #009999;
+        }
+
+        #content>.content_bottom>.content_bottom_down {
+            /* border: 3px solid red; */
+            height: 100%;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            flex-flow: column;
+        }
+
+        #content>.content_bottom>.content_bottom_down>.content_bottom_down_up {
+            /* border: 5px solid rgb(104, 104, 194); */
+            height: 5%;
+            width: 100%;
+            display: flex;
+            flex-flow: row nowrap;
+            justify-content: center;
+            white-space: nowrap;
+            gap: 8px;
+            position: relative;
+        }
+
+        #content>.content_bottom>.content_bottom_down>.content_bottom_down_up>.content_bot_item {
+            width: 80px;
+            height: 40px;
+            align-items: center;
+            display: flex;
+            justify-content: center;
+            font-family: DastNevis;
+            font-size: 15px;
+            text-align: center;
+            cursor: pointer;
+            padding: 0 10px;
+            position: relative;
+            right: 460px;
+            top: 10px;
+        }
+
+        #content>.content_bottom>.content_bottom_down>.content_bottom_down_up>.content_bot_item img {
+            margin-left: 10px;
+            margin-right: 10px;
+            display: flex;
+            flex-flow: row-reverse wrap;
+            justify-content: center;
+            position: relative;
+            top: 3px;
+        }
+
+        #content>.content_bottom>.content_bottom_down>.content_bottom_down_up>.content_bot_item:hover {
+            color: rgba(0, 153, 153, 1);
+        }
+
+        #content>.content_bottom>.content_bottom_down>.content_bottom_down_up>.content_bot_item.filter {
+            display: flex;
+            flex-direction: row-reverse;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .content_bot_item.filter:hover,
+        .content_bot_item.linked:hover {
+            color: rgba(0, 102, 102, 1);
+        }
+
+        .content_bot_item.filter:hover img,
+        .content_bot_item.linked:hover img {
+            filter: brightness(0) saturate(100%) invert(28%) sepia(93%) saturate(747%) hue-rotate(170deg) brightness(92%) contrast(92%);
+        }
+
+        .submenu {
+            display: none;
+            position: absolute;
+            background-color: #ffffff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            color: rgb(0, 0, 0);
+            width: 150px;
+            padding: 10px;
+            top: 40px;
+            left: 0;
+            border-radius: 15px;
+            z-index: 100;
+        }
+
+        .submenu p {
+            color: #009999;
+            font-family: DastNevis;
+        }
+
+        #content>.content_bottom>.content_bottom_down>.content_bottom_down_up>.content_bot_item.linked>.submenu a {
+            color: rgb(0, 0, 0);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        #content>.content_bottom>.content_bottom_down>.content_bottom_down_up>.content_bot_item.linked:hover>.submenu {
+            display: block;
+        }
+
+        #content>.content_bottom>.content_bottom_down>.content_bottom_down_up>.content_bot_item.filter>.submenu a {
+            color: rgb(0, 0, 0);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        #content>.content_bottom>.content_bottom_down>.content_bottom_down_up>.content_bot_item.filter:hover>.submenu {
+            display: block;
+        }
+
+        .submenu input[type="checkbox"] {
+            margin-left: 10px;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            border: 2px solid #fff;
+            background-color: transparent;
+            cursor: pointer;
+        }
+
+        .submenu input[type="checkbox"]:checked {
+            background-color: #009999;
+            border-color: #009999;
+        }
+
+        #content>.content_bottom>.content_bottom_down>.content_bottom_down_down {
+            /* border: 5px solid darkblue; */
+            height: 95%;
+            width: 100%;
+
+            display: flex;
+            justify-content: center;
+
+            flex-wrap: wrap;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        #content>.content_bottom>.content_bottom_down>.content_bottom_down_down>.book_box {
+            /* border: 3px solid lightpink; */
+
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            height: 400px;
+            width: 200px;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+
+            overflow: hidden;
+            box-sizing: border-box;
+            position: relative;
+            top: 5px;
+
+        }
+
+        #content>.content_bottom>.content_bottom_down>.content_bottom_down_down>.book_box>.book_img {
+            /* border: 3px solid rgb(225, 123, 15); */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            height: 55%;
+            width: 150px;
+            overflow: hidden;
+            margin-bottom: 700px auto;
+            margin-top: 20px;
+            position: relative;
+            right: 12%;
+
+        }
+
+        #content>.content_bottom>.content_bottom_down>.content_bottom_down_down>.book_box>.book_info h3 {
+            position: relative;
+            top: -2px;
+            white-space: wrap;
+            padding-right: 10px;
+            font-family: DastNevis;
+        }
+
+        #content>.content_bottom>.content_bottom_down>.content_bottom_down_down>.book_box>.book_info span {
+            display: block;
+            margin-bottom: 5px;
+            padding-right: 20px;
+            position: relative;
+            top: -10px;
+            font-size: 15px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            margin: 0;
+            font-family: DastNevis;
+        }
+
+        .hilight {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 40px;
+            background: #ccc;
+            width: auto;
+            height: 20px;
+        }
+
+        #content>.content_bottom>.content_bottom_down>.content_bottom_down_down>.book_box>.book_info .star {
+            background: url('img/icons8-star-15.png') no-repeat center center;
+            width: 20px;
+            height: 20px;
+            display: inline-block;
+            vertical-align: middle;
+            padding-right: 10px;
+            position: relative;
+            top: 3px;
+        }
+
+        #content>.content_bottom>.content_bottom_down>.content_bottom_down_down>.book_box>.book_info .rating {
+            display: flex;
+            align-items: center;
+            font-size: 16px;
+            overflow: hidden;
+            font-family: DastNevis;
+            gap: 5px;
+            position: relative;
+            top: -10px;
+        }
+
+        #content>.content_bottom>.content_bottom_down>.content_bottom_down_down>.book_box>.book_info .rating .hilight {
+            /* margin-right: 10px; */
+            background-color: #f4f4f4;
+            color: #333;
+            padding: 3px 7px;
+            border-radius: 5px;
+            font-weight: bold;
+            font-family: DastNevis;
+        }
+
+        #content>.content_bottom>.content_bottom_down>.content_bottom_down_down>.book_box>.book_info .rating .star {
+            margin-right: 5px;
+        }
+
+        #content>.content_bottom>.content_bottom_down>.content_bottom_down_down>.book_box>.book_info p {
+            position: relative;
+            top: 3px;
+            right: 15px;
+            font-family: DastNevis;
+        }
+
+        #content>.content_bottom>.content_bottom_down>.content_bottom_down_down>.book_box>.book_info .offLable {
+            background: #ff5733;
+            width: 50px;
+            padding: 15px 0;
+            position: absolute;
+            top: 1px;
+            left: 5%;
+            color: #fff;
+            font-family: 'Mitra', sans-serif;
+            text-align: center;
+            font-size: 15px;
+            font-family: DastNevis;
+            font-weight: 800;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            border-radius: 0;
+            clip-path: polygon(0% 0%, 100% 0%, 100% 75%, 50% 100%, 0% 75%);
+        }
+
+        #content>.content_bottom>.content_bottom_down>.content_bottom_down_down>.book_box>.book_info .offLable:hover {
+            background: #e74c3c;
+            transform: scale(1.1);
+        }
+
+        #second_page_content {
+            border-top: 1px solid #CCC;
+            width: 100%;
+            height: auto;
+            margin: auto;
+
+            display: flex;
+            justify-content: center;
+            flex-direction: row;
+        }
+
+        #second_page_content>.image img {
+            /* border: 1px solid lightcoral; */
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            width: 239px;
+            height: 354px;
+            border-radius: 15px;
+
+            display: flex;
+            justify-content: center;
+            position: relative;
+            top: 100px;
+            left: 70px;
+        }
+
+        #second_page_content>.info {
+            /* border: 1px solid lightcoral; */
+            /* box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); */
+            width: 439px;
+            height: 354px;
+            padding: 0 8px;
+
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            position: relative;
+            top: 100px;
+            left: 80px;
+        }
+
+        #second_page_content>.info h2 {
+            font-size: x-large;
+            font-weight: bold;
+            position: relative;
+            top: -30px;
+            right: 30px;
+        }
+
+        #second_page_content>.info span {
+            font-size: larger;
+            font-weight: 500;
+            position: relative;
+            top: -30px;
+            right: 30px;
+            margin-bottom: 15px;
+        }
+
+        #second_page_content>.info>.receive {
+            border: 1px solid #009999;
+            background: #ffffff;
+            color: #009999;
+            border-radius: 25px;
+            width: 250px;
+            height: 30px;
+            align-items: center;
+            display: flex;
+            justify-content: center;
+
+            text-align: center;
+            cursor: pointer;
+            padding-top: 10px;
+            position: relative;
+            right: 30px;
+            top: 10px;
+        }
+
+        #second_page_content>.info>.receive p {
+            font-size: 20px;
+            font-family: DastNevis;
+            text-align: center;
+
+            position: relative;
+            top: -5px;
+        }
+
+        #second_page_content>.info>.share {
+            background-color: #009999;
+            color: #fff;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            font-size: 30px;
+            font-family: DastNevis;
+            border: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            position: absolute;
+            right: 330px;
+            top: 276px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+        }
+
+        #second_page_content>.info>.share img {
+            width: 20px;
+            height: 20px;
+        }
+
+        #second_page_content>.info>.share:hover {
+            background-color: #007474;
+        }
+
+        #second_page_content>.box {
+            /* border: 1px solid lightcoral; */
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            width: 339px;
+            height: 354px;
+            padding: 0 8px;
+            border-radius: 15px;
+
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            position: relative;
+            top: 100px;
+            left: 80px;
+        }
+
+        #second_page_content>.box>.introduc {
+            /* border: 1px solid lightblue; */
+            border-bottom: 1px solid #ccc;
+            width: 90%;
+            height: 75%;
+
+            position: relative;
+            top: -40px;
+        }
+
+        #second_page_content>.box>.introduc p {
+            display: flex;
+            justify-content: center;
+            flex-flow: wrap;
+            text-align: center;
+            align-items: center;
+            font-family: DastNevis;
+            font-size: 16px;
+        }
+
+        #second_page_content>.box>.btn {
+            display: flex;
+            justify-content: center;
+            flex-direction: row;
+        }
+
+        #second_page_content>.box>.btn>.buy {
+            /* border: 1px solid #009999; */
+            background: #009999;
+            color: #ffff;
+            border-radius: 25px;
+            width: 120px;
+            height: 30px;
+            align-items: center;
+            display: flex;
+            justify-content: center;
+
+            text-align: center;
+            cursor: pointer;
+            padding-top: 10px;
+            position: relative;
+            right: 120px;
+            top: 10px;
+        }
+
+        #second_page_content>.box>.btn>.buy p {
+            font-size: 16px;
+            font-family: DastNevis;
+            text-align: center;
+
+            position: relative;
+            top: -5px;
+        }
+
+        #second_page_content>.box>.btn>.gift {
+            /* border: 1px solid #009999; */
+            background: #e8e8e8;
+            color: #009999;
+            border-radius: 25px;
+            width: 100px;
+            height: 30px;
+            align-items: center;
+            display: flex;
+            justify-content: center;
+
+            text-align: center;
+            cursor: pointer;
+            padding-top: 10px;
+            position: relative;
+            left: 150px;
+            top: 10px;
+        }
+
+        #second_page_content>.box>.btn>.gift p {
+            font-size: 16px;
+            font-family: DastNevis;
+            text-align: center;
+
+            position: relative;
+            top: -5px;
+        }
+
+        #backToFirstPage {
+            border: none;
+            display: inline-flex;
+            justify-content: center;
+            border-radius: 5px;
+            align-items: center;
+            background-color: #eeeeee;
+            width: 200px;
+            height: 40px;
+            position: relative;
+            top: 30px;
+            right: 150px;
+            color: #009999;
+            cursor: pointer;
+        }
+
+        #backToFirstPage h2 {
+            font-size: 16px;
+            font-family: DastNevis;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="first_page">
+        <div id="header">
+            <div class="up">
+                <div class="logo">
+                    <img src="img/taaghche_logo3.png">
+                </div>
+                <div class="search">
+                    <img src="img/icons8-search-24.png">
+                    <input type="text" placeholder=" جستجو در طاقچه ..." id="searchBox">
+                </div>
+                <div class="user_account">
+                    <p> ورود به حساب کاربری </p>
+                </div>
+            </div>
+            <div class="down">
+                <div class="item it1">
+                    <img src="img/icons8-menu-20.png">
+                    <p>دسته بندی ها</p>
+                </div>
+                <div class="item it2">
+                    <img src="img/icons8-audio-20.png">
+                    <p>صوتی</p>
+                </div>
+                <div class="item it3">
+                    <img src="img/icons8-infinity-20.png">
+                    <p>اشتراک بی نهایت</p>
+                </div>
+                <div class="cart">
+                    <img src="img/icons8-cart-20 (1).png">
+                    <span class="quantity">0</span>
+                </div>
+                <div class="shopping hide">
+                    <h1>کتابخانه من</h1>
+                    <ul class="listCart"></ul>
+                    <div class="checkout">
+                        <div class="total">0</div>
+                        <div class="closeShopping">بستن</div>
+                    </div>
+                </div>
+                <div class="install">
+                    <p>نصب طاقچه</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="content">
+            <div class="content_top">
+                <p>نتیجه جستجو ...</p>
+            </div>
+            <div class="content_bottom">
+                <div class="content_bottom_up">
+                    <div class="content_bot_item" id="filter_all">
+                        <p>همه</p>
+                    </div>
+                    <div class="content_bot_item" id="filter_electronic">
+                        <p>الکترونیکی</p>
+                    </div>
+                    <div class="content_bot_item" id="filter_audio">
+                        <p>صوتی</p>
+                    </div>
+                    <div class="content_bot_item" id="filter_infinite">
+                        <p>بی نهایت</p>
+                    </div>
+                </div>
+
+                <div class="content_bottom_down">
+                    <div class="content_bottom_down_up">
+                        <div class="content_bot_item filter">
+                            <p>فیلتر</p>
+                            <img src="img/icons8-filter-15.png">
+                            <div class="submenu">
+                                <a href="#"><input type="checkbox" id="offCheck">تخفیفی ها</a>
+                            </div>
+                        </div>
+
+                        <div class="content_bot_item linked">
+                            <img src="img/icons8-link-20.png">
+                            <p id="linkedText">دسته بندی ها</p>
+                            <div class="submenu">
+                                <p>مرتب کردن بر اساس...</p>
+                                <a href="#" onclick="changeText('پرفروش ترین')">
+                                    <input type="radio" name="filter" class="filter" value="topSelling">پرفروش ترین
+                                </a>
+                                <a href="#" onclick="changeText('ارزان ترین')">
+                                    <input type="radio" name="filter" class="filter" value="cheapest">ارزان ترین
+                                </a>
+                                <a href="#" onclick="changeText('محبوب ترین')">
+                                    <input type="radio" name="filter" class="filter" value="mostPopular">محبوب ترین
+                                </a>
+                                <a href="#" onclick="changeText('خارجی')">
+                                    <input type="radio" name="filter" class="filter" value="foreign">خارجی
+                                </a>
+                                <a href="#" onclick="changeText('داخلی')">
+                                    <input type="radio" name="filter" class="filter" value="domestic">داخلی
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="content_bottom_down_down" id="bookContainer"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="second_page" style="display: none;">
+        <div id="header">
+            <div class="up">
+                <div class="logo">
+                    <img src="img/taaghche_logo3.png">
+                </div>
+                <div class="search">
+                    <img src="img/icons8-search-24.png">
+                    <input type="text" placeholder=" جستجو در طاقچه ..." id="searchBox">
+                </div>
+                <div class="user_account">
+                    <p> ورود به حساب کاربری </p>
+                </div>
+            </div>
+            <div class="down">
+                <div class="item it1">
+                    <img src="img/icons8-menu-20.png">
+                    <p>دسته بندی ها</p>
+                </div>
+                <div class="item it2">
+                    <img src="img/icons8-audio-20.png">
+                    <p>صوتی</p>
+                </div>
+                <div class="item it3">
+                    <img src="img/icons8-infinity-20.png">
+                    <p>اشتراک بی نهایت</p>
+                </div>
+                <div class="cart">
+                    <img src="img/icons8-cart-20 (1).png">
+                    <span class="quantity">0</span>
+                </div>
+                <div class="shopping hide">
+                    <h1>کتابخانه من</h1>
+                    <ul class="listCart"></ul>
+                    <div class="checkout">
+                        <div class="total">0</div>
+                        <div class="closeShopping">بستن</div>
+                    </div>
+                </div>
+                <div class="install">
+                    <p>نصب طاقچه</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="second_page_content">
+            <button id="backToFirstPage">
+                <h2>بازگشت به صفحه نخست</h2>
+            </button>
+            <div class="image">
+                <img id="bookImage" src="" alt="Book Image">
+            </div>
+            <div class="info">
+                <h2 id="bookTitle">محکم در آغوشم بگیر</h2>
+                <span id="bookWriter">نویسنده: سو جانسن</span>
+                <span id="bookTranslator">مترجم: سمانه پرهیزکاری</span>
+                <span id="bookPublisher">انتشارات: ملیکان</span>
+                <div class="receive">
+                    <p>دریافت نمونه کتاب</p>
+                </div>
+                <div class="share">
+                    <img src="img/icons8-share-40 (3).png">
+                </div>
+            </div>
+            <div class="box">
+                <div class="introduc">
+                    <h3>معرفی کتاب :</h3>
+                    <p id="bookDescription">کتاب محکم در آغوشم بگیر با زیرعنوان ...</p>
+                </div>
+                <div class="btn">
+                    <div class="buy">
+                        <p>خرید و مطالعه کتاب</p>
+                    </div>
+                    <div class="gift">
+                        <p>هدیه به دیگری</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let allBooks = [
+            { id: 1, title: "محکم در آغوشم بگیر", writer: "سو جانسن", tranlator: "سمانه پرهیزکاری", publish: "ملیکان", price: "155000 تومان", off: 20, star: 4.5, category: "صوتی", pic: ["01.jpg"], introduc: "کتاب محکم در آغوشم بگیر با زیرعنوان «هفت گفت‌وگو برای یک عمر زندگی با عشق» نوشته‌ی سو جانسون راهنمایی تمام‌وکمال برای بهبود و ساختن رابطه‌ای امن و سرشار از زیبایی است. سو جانسون، روان‌شناس مطرح بریتانیایی است و با این کتاب به هزاران زوج در سرتاسر دنیا کمک کرده تا رابطه‌‌شان را بهبود ببخشند و به آرامش و شادی برسند" },
+            { id: 2, title: "با تو شروع نشده", writer: "مارک ولن", tranlator: "شبنم درویش", publish: "ملیکان", price: "30000تومان", off: 0, star: 3.1, category: "الکترونیکی", pic: ["02.jpg"], introduc: "کتاب الکترونیکی با تو شروع نشده نوشتۀ مارک وولین با ترجمه‌ٔ ملیکا شایسته و شبنم درویش توسط انتشارات میلکان منتشر شده است. این کتاب به بررسی نقش تروماها و آسیب‌های روانی خانوادگی در شکل‌گیری شخصیت و رفتارهای افراد می‌پردازد و نحوه‌ٔ شکستن چرخه این آسیب‌های بین نسلی را توضیح می‌دهد." },
+            { id: 3, title: "بدن فراموش نمی کند", writer: "بسل ون درکولک", tranlator: "اکبر درویشی", publish: "ملیکان", price: "310000تومان", off: 0, star: 3, category: "الکترونیکی", pic: ["03.jpg"], introduc: "کتاب بدن فراموش نمی کند؛ مغز، ذهن و بدن در بهبود تروما نوشتهٔ بسل ون درکولک و ترجمهٔ اکبر درویشی است و انتشارات میلکان آن را منتشر کرده است." },
+            { id: 4, title: "365 روز بدون تو", writer: "آکیرا", tranlator: "نهال سهیلی فر", publish: "داهی", price: "130000تومان", off: 45, star: 4.1, category: "صوتی", pic: ["04.jpg"], introduc: "کتاب ۳۶۵ روز بدون تو (356days without you) شامل اشعار کوتاه آکیرا، نویسنده‌ی اهل کاناداست. این کتاب با یک شکست عشقی شروع می‌شود و فرازوفرودهایی را که نویسنده در این دوره تجربه می‌کند، نشان می‌دهد. او هر روز یک شعر کوتاه نوشته و احساسات آزاردهنده‌ی خود را از این طریق ابراز کرده است. انتشارات مجید این اثر را با ترجمه نهال سهیلی‌فر منتشر کرده است." },
+            { id: 5, title: "پنچ قدم فاصله", writer: "ریچل لیپینکات", tranlator: "فاطمه صبحی", publish: "ملیکان", price: "60000تومان", off: 0, star: 2.8, category: "الکترونیکی", pic: ["05.jpg"], introduc: "کتاب پنج قدم فاصله -که در ایران با نام ۵ فوت فاصله هم شناخته می‌شود- یک رمان عاشقانه برای نوجوانان نوشته‌ی ریچل لیپینکات براساس فیلمنامه‌ای از میکی داتری و توبیاس ایاکونیس است. این کتاب در سال ۲۰۱۸ منتشر شد و در بین خوانندگان بزرگسال و نوجوان به محبوبیت و توجه زیادی دست یافت. داستان حول محور دو نوجوان به نام‌های استلا گرانت و ویل نیومن می‌چرخد که هردو مبتلا به یک اختلال ژنتیکی به نام فیبروز کیستیک (CF) هستند که ریه‌ها و سایر اندام‌ها را تحت تاثیر قرار می‌دهد." },
+            { id: 6, title: "وقتی نیچه گریست", writer: "اروین د. یالوم", tranlator: "سپیده حبیب", publish: "قطره", price: "90000تومان", off: 25, star: 3.1, category: ["الکترونیکی", "صوتی"], pic: ["06.jpg"], introduc: "کتاب صوتی وقتی نیچه گریست نوشته‌ی اروین د. یالوم یکی از نویسندگان سرشناس قرن بیستم است. یالوم در این اثر تلفیقی از واقعیت، تخیل، روانشناسی و فلسفه را به تصویر کشیده است و به سرنوشت سه تن از بزرگترین روانشناسان و فیلسوفان جهان، فردریش نیچه، زیگموند فروید و یوزف بروئر، می‌پردازد." },
+            { id: 7, title: "شب های روشن", writer: "فئودور داستایفسکی", tranlator: "سروش حبیبی", publish: "ماهی", price: "85000تومان", off: 0, star: 4.2, category: "صوتی", pic: ["07.jpg"], introduc: "کتاب شب های روشن داستان لطیف و عاشقانه‌ای از فئودور داستایفسکی نویسنده مشهور و تأثیرگذار اهل روسیه است. شب‌های روشن از احساسات مرد جوان تنهایی می‌گوید که به دنبال هم‌صحبت می‌گردد." },
+            { id: 8, title: "هر دو در نهایت می میرند", writer: "آدام سیلورا", tranlator: "میلاد بابانژاد", publish: "نون", price: "30000تومان", off: 10, star: 4.4, category: "الکترونیکی", pic: ["08.jpg"], introduc: "تاب هر دو در نهایت می میرند رمانی از آدام سیلورا نویسنده‌ی جوان آمریکایی است. این اثر داستان «متیو» و «روفوس» است که متوجه می‌شوند یک روز بیش‌تر از زندگی‌شان باقی نمانده است. مرگ پیش‌رو باعث می‌شود این‌دو با هم آشنا شوند و در یک روز باقی‌مانده از زندگی، اتفاقات متفاوتی را تجربه کنند. ماجراهایی که زیبایی‌ها و غیرقابل پیش‌بینی بودن زندگی حتا در آخرین ساعاتش را به‌زیبایی تصویر می‌کند." },
+            { id: 9, title: "سمفونی مردگان", writer: "عباس معروفی", publish: "ققنوس", price: "30000تومان", off: 0, star: 3.4, category: "صوتی", pic: ["09.jpg"], introduc: "کتاب سمفونی مردگان نوشته‌ی عباس معروفی یکی از مهم‌ترین رمان‌های ادبیات معاصر ایران است. این اثر که همواره ستایش شده است و جوایز بسیاری را از آن خود کرده است، داستان زندگی خانواده‌ای را روایت می‌کند که در میانشان غوغایی به پا می‌شود و آتش اختلافات فکری بینشان شعله می‌کشد." },
+            { id: 10, title: "بازی های میراث", writer: "جنیفر لین بارنز", tranlator: "نجلا محقق", publish: "نون", price: "1500000تومان", off: 30, star: 3.8, category: "الکترونیکی", pic: ["10.jpg"], introduc: "کتاب بازی های میراث نوشتهٔ جنیفر لین بارنز و ترجمهٔ نجلا محقق است. نشر نون این رمان آمریکایی را برای نوجوانان و جوانان منتشر کرده است." },
+            { id: 11, title: "یاد او", writer: "کالین هوور", tranlator: "عباس زارعی", publish: "آموت", price: "980000تومان", off: 0, star: 3.5, category: ["الکترونیکی", "صوتی"], pic: ["11.jpg"], introduc: "کتاب یاد او - که با عنوان یادبودهای او نیز شناخته می‌شود- رمانی نوشته‌ی کالین هوور نویسنده‌ی آمریکایی و منتشرشده در سال ۲۰۲۲ است. این کتاب داستان زنی به نام کنا را روایت می‌کند که ۵ سال از زندگی‌اش را در زندان گذرانده و اکنون بازگشته تا بتواند دخترش را ببیند، اما در این مسیر با موانع بسیاری روبه‌رو می‌شود." },
+            { id: 12, title: "بیگانه", writer: "آلبر کامو", tranlator: "کاوه میرعباسی", publish: "چشمه", price: "120000تومان", off: 0, star: 3.4, category: "الکترونیکی", pic: ["12.jpg"], introduc: "کتاب بیگانه رمانی از آلبر کامو نویسنده‌ی شهیر و فیلسوف فرانسوی است. بیگانه یکی از مهم‌ترین آثار کامو است که فلسفه‌ی او و نگاهش به حقیقت، در آن به‌‌روشنی جلوه‌گر شده است. «مورسو» شخصیت اصلی رمان کامو، جوانی متفاوت با عامه‌ی مردم است که نمی‌تواند با عرف جامعه همگام شود؛ در این تفاوت حقیقتی نهفته است. بیگانه آلبر کامو یکی از مهم‌ترین رمان‌های قرن بیستم و رمانی درخشان و یگانه است." },
+            { id: 13, title: "غرور و تعصب", writer: "جین آستین", tranlator: "رضا رضایی", publish: "نی", price: "30000تومان", off: 0, star: 3.4, category: "صوتی", pic: ["13.jpg"], introduc: "جین آستن، نویسنده‌ انگلیسی است که با آثارش ادبیات غرب را تحت تأثیر قرار داد. شناخت او از زندگی زنان و مهارتش در گوشه و کنایه‌ها، او را به یکی از مشهورترین رمان‌نویسان عصر خودش تبدیل کرده‌ است. «غرور و تعصب» از مشهورترین آثار جین آستین است و در زمره صد اثر برتر جهان شناخته می‌شود." },
+            { id: 14, title: "واژه هایی در اعماق آبی دریا", writer: "کت کرولی", tranlator: "زهرا جهانفریان", publish: "کوله پشتی", price: "30000تومان", off: 0, star: 2.4, category: "الکترونیکی", pic: ["14.jpg"], introduc: "کتاب واژه‌هایی در اعماق آبی دریا، نوشته‌ی کت کرولی، رمانی عاشقانه از زندگی چندنفر است که به واسطه‌ی نامه‌های زیبا و دنیای پر رمز و راز کتاب‌ها بهم گره خورده است. " },
+            { id: 15, title: "انجمن شاعران مرده", writer: "ان. اچ کلاین باوم", tranlator: "زهرا طراوتی", publish: "نیماژ", price: "50000تومان", off: 70, star: 3.9, category: ["الکترونیکی", "صوتی"], pic: ["15.jpg"], introduc: "کتاب انجمن شاعران مرده اثر نانسی اچ. کلاین باوم نویسنده و روزنامه‌نگار آمریکایی است و در سال ۱۹۸۸ به چاپ رسیده است. این کتاب که بر اساس فیلمی با همین نام با بازی رابین ویلیامز نوشته شده، داستان یک معلم انگلیسی الهام‌بخش را بازگو می‌کند که دانش‌آموزان سرکوب‌شده‌ی خود را تشویق می‌کند تا در لحظه زندگی کنند. نسخه‌ی فارسی این کتاب توسط زهرا طراوتی ترجمه و توسط نشر نیماژ منتشر شده است." },
+            { id: 16, title: "قصر آبی", writer: "ال.ام مونتگومری", tranlator: "محمدحسام برجیسیان", publish: "قدیانی", price: "135000تومان", off: 0, star: 4.4, category: "صوتی", pic: ["16.jpg"], introduc: "کتاب قصر آبی رمانی نوشته ال.ام مونت‌گومری، نویسندهٔ داستان‌های آن شرلی، امیلی در نیومون و قصه‌های جزیره است. این کتاب را انتشارات قدیانی منتشر کرده است. این کتاب را محمدحسام برجیسیان ترجمه کرده بود. " },
+            { id: 17, title: "چرا تا به حال کسی این ها را به من نگفته؟", writer: "جولی اسمیت", tranlator: "آرزو شنطیایی", publish: "ملیکان", price: "450000تومان", off: 0, star: 3, category: "الکترونیکی", pic: ["17.jpg"], introduc: "کتاب چرا تا به حال کسی این ها را به من نگفته بود؟ نوشتهٔ جولی اسمیت و ترجمهٔ آرزو شنطیایی است و انتشارات میلکان آن را منتشر کرده است. درک راه‌های متعدد برای کنترل احساساتتان و نیل به سلامت روان به شما قدرت زیادی برای پیمودن این مسیر می‌بخشد. هدف این کتاب نیز همین است." },
+            { id: 18, title: "کمال گرای مضطرب", writer: "کلاریسا دبلیو. آنگ، مایکل پی. توهیگ", tranlator: "حمیده عرب نژاد", publish: "ملیکان", price: "140000تومان", off: 0, star: 4, category: "صوتی", pic: ["18.jpg"], introduc: "این کتاب فوق‌العاده خواندنی و ملموس مسیر آزادی را برای کسانی که در جست‌وجوی غیرواقع‌بینانهٔ کمال‌گرایی هستند روشن می‌کند. نویسندگان خواننده را در درک اینکه کمال‌گرایی، در نقش دستورالعملی برای زندگی‌کردن، چگونه با شکست همراه است، راهنمایی و اقداماتی را تأیید می‌کنند که منطبق با ارزش‌ها باشند و نه احساسات. پس اگر شما یا یکی از عزیزانتان کمال‌گرا هستید، یا اگر مسئولیت حفاظت و نگهداری از افراد کمال‌گرا را بر عهده دارید، این کتاب بدون شک کتابی «واجب» برای کتابخانهٔ شماست." },
+            { id: 19, title: "افسانه عادی بودن", writer: "گبور مته، دنیل مته", tranlator: "آراز بارسقیان", publish: "ملیکان", price: "55000تومان", off: 20, star: 3.6, category: "الکترونیکی", pic: ["19.jpg"], introduc: "کتاب افسانه عادی بودن با زیرعنوان تروما، بیماری و درمان در فرهنگ سمی اثری از گبور مته و دنیل مته در مورد سلامتی است؛ سلامتی روانی و جسمانی افراد که این روزها به‌شدت در خطر قرار دارد. نویسنده در این کتاب به ما نشان می‌دهد که سبک زندگی امروزی چطور ما را تحت تسلط خود درآورده و آسیب‌های بی‌شماری به سلامتی جسمانی و روانی‌مان می‌زند. گبور مته به‌عنوان یک پزشک، در این کتاب با همراهی دنیل مته حاصل سال‌ها تحقیقاتش را در اختیار خوانندگان قرار داده است." },
+            { id: 20, title: "انسان در جستجوی معنا", writer: "ویکتور فرانکل", tranlator: "علیرضا ارجاع", publish: "شمشاد", price: "152000تومان", off: 0, star: 4.6, category: [" الکترونیکی", " صوتی"], pic: ["20.jpg"], introduc: "انسان در جستجوی معنا، کتابی از ویکتور فرانکل، روانپزشک اتریشی پدیدآورنده‌ی معنا درمانی است. او در کتاب انسان در جستجوی معنا، خاطراتش از زندگی در اردوگاه‌های کار اجباری آشویتس را نوشته است." }
+        ];
+
+        let cartItems = [];
+        let body = document.querySelector('body');
+        let listCart = document.querySelector('.listCart');
+        let total = document.querySelector('.total');
+        let quantity = document.querySelector('.quantity');
+
+        function fillWithBooks(filteredBooks) {
+            const container = document.getElementById("bookContainer");
+            container.innerHTML = '';
+            filteredBooks.forEach(book => {
+                const bookBox = document.createElement("div");
+                bookBox.classList.add("book_box");
+                bookBox.innerHTML = `
+                <div class="book_img">
+                    <img src="img/${book.pic[0]}" alt="${book.title}" class="bookImageClick" data-id="${book.id}">
+                </div>
+                <div class="book_info">
+                    <button class="addToCart">+</button>
+                    <h3>${book.title}</h3>
+                    <span>${book.writer}</span>
+                    <span>${book.price}</span>
+                    <div class="rating">
+                        <p class="hilight">${book.category}</p>
+                        <span class="star"></span>${book.star}
+                    </div>
+                    ${book.off > 0 ? `<div class="offLable">${book.off}% تخفیف</div>` : ''}
+                </div>
+            `;
+                container.appendChild(bookBox);
+            });
+
+            const addToCartButtons = container.querySelectorAll(".addToCart");
+            addToCartButtons.forEach(button => {
+                button.addEventListener("click", function () {
+                    const bookBox = button.closest(".book_box");
+                    const bookTitle = bookBox.querySelector("h3").innerText;
+                    const bookPrice = bookBox.querySelector("span:nth-of-type(2)").innerText;
+                    const bookImage = bookBox.querySelector(".book_img img").src;
+
+                    let existingItem = cartItems.find(item => item.title === bookTitle);
+
+                    if (existingItem) {
+                        existingItem.quantity++;
+                    } else {
+                        const item = {
+                            title: bookTitle,
+                            price: bookPrice,
+                            image: bookImage,
+                            quantity: 1
+                        };
+                        cartItems.push(item);
+                    }
+
+                    updateCartList();
+                });
+            });
+
+            const bookImages = container.querySelectorAll('.bookImageClick');
+            bookImages.forEach(image => {
+                image.addEventListener('click', function () {
+                    const bookId = this.getAttribute('data-id');
+                    showBookDetails(bookId);
+                });
+            });
+        }
+
+        function updateCartList() {
+            const cartQuantity = document.querySelector(".quantity");
+            const listCart = document.querySelector(".listCart");
+
+            cartQuantity.innerText = cartItems.reduce((sum, item) => sum + item.quantity, 0);
+            listCart.innerHTML = "";
+
+            cartItems.forEach(item => {
+                const li = document.createElement("li");
+                li.innerHTML = `
+                <div style="display: flex; align-items: center;">
+                    <img src="${item.image}" alt="${item.title}" style="width: 50px; height: 50px;">
+                    <span style="margin-left: 10px;">${item.title} - تعداد: ${item.quantity}</span>
+                </div>
+                <button class="removeFromCart" data-title="${item.title}"></button>
+            `;
+                listCart.appendChild(li);
+            });
+
+            const removeButtons = document.querySelectorAll(".removeFromCart");
+            removeButtons.forEach(button => {
+                button.addEventListener("click", function () {
+                    const bookTitle = button.getAttribute("data-title");
+                    const item = cartItems.find(item => item.title === bookTitle);
+
+                    if (item.quantity > 1) {
+                        item.quantity -= 1;
+                    } else {
+                        cartItems = cartItems.filter(item => item.title !== bookTitle);
+                    }
+
+                    updateCartList();
+                });
+            });
+        }
+
+        function showBookDetails(bookId) {
+            const book = allBooks.find(b => b.id == bookId);
+            if (book) {
+                document.getElementById("second_page").style.display = 'block';
+                document.getElementById("first_page").style.display = 'none';
+
+                document.getElementById("bookImage").src = `img/${book.pic[0]}`;
+                document.getElementById("bookTitle").textContent = book.title;
+                document.getElementById("bookWriter").textContent = `نویسنده: ${book.writer}`;
+                document.getElementById("bookTranslator").textContent = `مترجم: ${book.tranlator}`;
+                document.getElementById("bookPublisher").textContent = `انتشارات: ${book.publish}`;
+                document.getElementById("bookDescription").textContent = book.introduc;
+
+                const addToCartButton = document.querySelector("#second_page_content >.addToCart");
+                addToCartButton.onclick = function () {
+                    let existingItem = cartItems.find(item => item.title === book.title);
+
+                    if (existingItem) {
+                        existingItem.quantity++;
+                    } else {
+                        const item = {
+                            title: book.title,
+                            price: book.price,
+                            image: `img/${book.pic[0]}`,
+                            quantity: 1
+                        };
+                        cartItems.push(item);
+                    }
+
+                    updateCartList();
+                };
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            document.querySelector(".cart").addEventListener('click', () => {
+                body.classList.add('active');
+            });
+
+            document.querySelector(".closeShopping").addEventListener('click', () => {
+                body.classList.remove('active');
+            });
+
+            document.getElementById("searchBox").addEventListener("input", function () {
+                let searchValue = this.value.toLowerCase();
+                const filteredBooks = allBooks.filter(book =>
+                    book.title.toLowerCase().includes(searchValue) ||
+                    book.writer.toLowerCase().includes(searchValue)
+                );
+                fillWithBooks(filteredBooks);
+            });
+
+            document.getElementById("offCheck").addEventListener("change", function () {
+                let filteredBooks;
+                if (this.checked) {
+                    filteredBooks = allBooks.filter(book => book.off > 0);
+                } else {
+                    filteredBooks = allBooks;
+                }
+                fillWithBooks(filteredBooks);
+            });
+
+
+            document.getElementById("filter_all").addEventListener('click', () => {
+                fillWithBooks(allBooks);
+            });
+
+            document.getElementById("filter_electronic").addEventListener('click', () => {
+                const filteredBooks = allBooks.filter(book => book.category.includes("الکترونیکی"));
+                fillWithBooks(filteredBooks);
+            });
+
+            document.getElementById("filter_audio").addEventListener('click', () => {
+                const filteredBooks = allBooks.filter(book => book.category.includes("صوتی"));
+                fillWithBooks(filteredBooks);
+            });
+
+            document.getElementById("backToFirstPage").addEventListener("click", function () {
+                document.getElementById("second_page").style.display = 'none';
+                document.getElementById("first_page").style.display = 'block';
+            });
+            document.querySelector(".cart").onclick = function () {
+                document.querySelector(".shopping").classList.add("show");
+                document.querySelector(".shopping").classList.remove("hide");
+            };
+
+            document.querySelector(".closeShopping").onclick = function () {
+                document.querySelector(".shopping").classList.add("hide");
+                document.querySelector(".shopping").classList.remove("show");
+            };
+
+            function filterBooks() {
+                let filteredBooks = allBooks;
+
+                const offCheck = document.getElementById("offCheck").checked;
+                if (offCheck) {
+                    filteredBooks = filteredBooks.filter(book => book.off > 0);
+                }
+
+                const topSelling = document.querySelector('input[value="topSelling"]:checked');
+                if (topSelling) {
+                    filteredBooks = filteredBooks.filter(book => book.star > 3.5);
+                }
+
+                const mostPopular = document.querySelector('input[value="mostPopular"]:checked');
+                if (mostPopular) {
+                    filteredBooks = filteredBooks.filter(book => book.star > 4);
+                }
+
+                const foreign = document.querySelector('input[value="foreign"]:checked');
+                if (foreign) {
+                    filteredBooks = filteredBooks.filter(book => book.tranlator && book.tranlator.trim() !== "");
+                }
+
+                const domestic = document.querySelector('input[value="domestic"]:checked');
+                if (domestic) {
+                    filteredBooks = filteredBooks.filter(book => !book.tranlator || book.tranlator.trim() === "");
+                }
+
+                const cheapest = document.querySelector('input[value="cheapest"]:checked');
+                if (cheapest) {
+                    filteredBooks = filteredBooks.filter(book => {
+                        const price = parseInt(book.price.replace(/\D/g, ""));
+                        return price < 100000;
+                    });
+                }
+
+                fillWithBooks(filteredBooks);
+            }
+
+            document.querySelectorAll(".filter").forEach(filter => {
+                filter.addEventListener("change", filterBooks);
+            });
+
+            fillWithBooks(allBooks);
+        });
+    </script>
+
+</body>
